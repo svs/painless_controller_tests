@@ -118,6 +118,9 @@ describe ItemsController do
       end
 
       describe "update" do
+        before :each do
+          Item.any_instance.expects(:save).returns(true)
+        end
         it_should_behave_like "authorised action" do
           let(:action) { Proc.new {put :update, {:id => @item.id, :item => {}} } }
           let(:variables) { {:item => lambda{ eq @item} } }
